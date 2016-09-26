@@ -1,5 +1,3 @@
-## What is MMClass ##
-
 ## Example ##
 
 ### ES 6 syntax: ###
@@ -36,7 +34,7 @@ Class Cat extends Pet {
 }
 ```
 
-### ES5 version with MMClass: ###
+### ES5 version with class: ###
 
 ```js
 var Pet = Class({
