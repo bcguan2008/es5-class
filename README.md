@@ -37,44 +37,31 @@ Class Cat extends Pet {
 ### ES5 version with class: ###
 
 ```js
-var Pet = Class({
-	constructor: function(name) {
-		this._name = name
-	},
-	speak: function() {
-		console.log(this._name + ' says...')
-	}
+
+var Person = new Class({
+    constructor:function(name,sex){
+        this.name = name;
+        this.sex = 'F';
+    },
+    sayHello:function(){
+        console.log('I am '+ this.name);
+    }
+});
+
+var Engineer = Person.extend({
+    constructor:function(name){
+        this.$super(name,'F');
+    },
+    sayHello:function(){
+        this.$super();
+        console.log('I am coding now');
+    }
 })
 
-var Dog = Class.extend(Pet)({
-	constructor: function($super, name) {
-		$super(name)
-	},
-	woof: function() {
-		return 'Woof, woof!'
-	},
-	speak: function($super) {
-		$super.speak()
-		console.log(this.woof() + " I'm a dog, pet me!")
-	}
-})
-
-var Cat = Class.extend(Pet)({
-	// if no constructor provided,
-	// default to constructor(...args) { super(...args) }
-	meow: function() {
-		return 'Meow ~~'
-	},
-	speak: function($super) {
-		$super.speak()
-		console.log(this.meow() + " I'm a cat, go away!")
-	}
-})
-
-
-var dog = new Dog('Odie')
-dog.speak() // Output: Odie says... Woof, woof! I'm a dog, pet me!
-
-var cat = new Cat('Garfield')
-cat.speak() // Output: Garfield says... Meow ~~ I'm a cat, go away!
+var jobs = new Engineer('jobs')
+jobs.sayHello();
+/* output: 
+I am jobs
+I am coding now
+*/
 ```
