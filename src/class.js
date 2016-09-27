@@ -1,4 +1,7 @@
 
+/**
+ * util function 
+ */
 var Util = {
     merge: function (obj, args) {
         for (var i in args) {
@@ -9,6 +12,9 @@ var Util = {
 
 var fnTest = /xyz/.test(function () { xyz; }) ? /this.\$super\b/ : /.*/;
 
+/**
+ * constructor function should be applyed when object initialize;
+ */
 function CreateConstructor(obj, args, self, $super) {
     var CONSTRUCTORKEY = "constructor";
     if (typeof obj[CONSTRUCTORKEY] === 'function'&& fnTest.test(obj[CONSTRUCTORKEY]) )  {
@@ -24,6 +30,7 @@ function CreateConstructor(obj, args, self, $super) {
  */
 function LoadMethod(_super, name, fn) {
     return function () {
+        //this.$super should not be changed, need add temp to keep 
         var temp = this.$super;
         this.$super = _super[name];
         var ret = fn.apply(this, arguments);
