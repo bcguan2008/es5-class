@@ -1,7 +1,7 @@
 {
   "name": "class",
   "version": "1.0.0",
-  "description": "",
+  "description": "class, super, oop, extend, constrcutor",
   "main": "index.js",
   "directories": {
     "example": "example",
