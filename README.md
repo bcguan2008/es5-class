@@ -37,11 +37,9 @@ Class Cat extends Pet {
 ### ES5 version with class: ###
 
 ```js
-
 var Person = new Class({
     constructor:function(name,sex){
         this.name = name;
-        this.sex = 'F';
     },
     sayHello:function(){
         console.log('I am '+ this.name);
@@ -50,7 +48,7 @@ var Person = new Class({
 
 var Engineer = Person.extend({
     constructor:function(name){
-        this.$super(name,'F');
+        this.$super(name);
     },
     sayHello:function(){
         this.$super();
