@@ -93,7 +93,7 @@ describe('My Framework',function(){
 
         var CombineCal = Base.extend({
             constructor:function(){
-                this.count = 0;
+                this.$super();
             },
             calculate:function(x){
                 return this.$super(x) * 2 ;

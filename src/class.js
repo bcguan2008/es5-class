@@ -10,7 +10,7 @@ var Util = {
     }
 }
 
-var fnTest = /xyz/.test(function () { xyz; }) ? /this.\$super\b/ : /.*/;
+var fnTest = /this.\$super\b/;
 
 /**
  * constructor function should be applyed when object initialize;
