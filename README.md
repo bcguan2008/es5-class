@@ -56,5 +56,7 @@ I am coding now
 ```
 
 ### Unit test ###
-
+```javascript
+npm test
+```
 <img src="assets/image/test.png"  alt="test" align=center />
