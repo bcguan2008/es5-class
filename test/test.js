@@ -5,7 +5,7 @@ var chai = require('chai'),
 
 var Class = require('../src/class.js');
 
-describe('My Framework',function(){
+describe('Test Class',function(){
 
     it('Shoud be a Class',function(){
         var jobs = new Class();
