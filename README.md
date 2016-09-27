@@ -3,35 +3,26 @@
 ### ES 6 syntax: ###
 
 ```js
-Class Pet {
-	constructor(name) {
-		this._name = name
-	}
-	speak() {
-		console.log(this._name + ' says...')
-	}
+Class Person {
+    constructor(name) {
+        this.name = name
+    }
+    sayHello() {
+        console.log('I am '+ this.name);
+    }
 }
-Class Dog extends Pet {
-	constructor(name) {
-		super(name)
-	}
-	woof() {
-		return 'Woof, woof!'
-	}
-	speak() {
-		super.speak()
-		console.log(this.woof() + " I'm a dog, pet me!")
-	}
+
+Class Engineer extends Person {
+    constructor(name) {
+        super(name);
+    }
+    sayHello() {
+        super();
+        console.log('I am coding now');
+    }
 }
-Class Cat extends Pet {
-	meow() {
-		return 'Meow ~~'
-	}
-	speak() {
-		super.speak()
-		console.log(this.meow() + " I'm a cat, go away!")
-	}
-}
+
+new Engineer('jobs').sayHello()
 ```
 
 ### ES5 version with class: ###
