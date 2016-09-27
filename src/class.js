@@ -9,26 +9,29 @@ var Util = {
 
 var fnTest = /xyz/.test(function () { xyz; }) ? /this.\$super\b/ : /.*/;
 
-function CreateConstructor(Obj, args, self) {
+function CreateConstructor(obj, args, self, $super) {
     var CONSTRUCTORKEY = "constructor";
-
-    if (typeof Obj[CONSTRUCTORKEY] === 'function') {
-        return Obj[CONSTRUCTORKEY].apply(self, args);
+    if (typeof obj[CONSTRUCTORKEY] === 'function'&& fnTest.test(obj[CONSTRUCTORKEY]) )  {
+        return LoadMethod($super,CONSTRUCTORKEY,obj[CONSTRUCTORKEY]).apply(self,args);
+    }
+    else{
+        return obj[CONSTRUCTORKEY].apply(self, args);
     }
 }
 
 /**
- * curring for lazy apply 
+ * curring for lazy apply
  */
-function CreateMethod(_super, name, fn) {
+function LoadMethod(_super, name, fn) {
     return function () {
-        var tmp = this.$super;
+        var temp = this.$super;
         this.$super = _super[name];
         var ret = fn.apply(this, arguments);
-        this.$super = tmp;
+        this.$super = temp;
         return ret;
     };
 }
+
 
 function Class(args) {
 
@@ -39,25 +42,25 @@ function Class(args) {
     Util.merge(returnVal.prototype, args);
 
     returnVal.extend = function (childArgs) {
-        var child = function () {
-            CreateConstructor(childArgs, arguments, this);
-        };
-        var templateFun = function () { };
-        /**
-         * template function avoid duplication constructor calling 
-         */
-        templateFun.prototype = this.prototype;
-        child.prototype = new templateFun();
-        child.prototype.constructor = child;
-
         /**
          * get parent obj's function
          */
         var _super = this.prototype;
 
+        var child = function () {
+            CreateConstructor(childArgs, arguments, this, _super);
+        };
+        var templateFun = function () { };
+        /**
+         * template function avoid duplication constructor calling
+         */
+        templateFun.prototype = this.prototype;
+        child.prototype = new templateFun();
+        child.prototype.constructor = child;
+
         for (var name in childArgs) {
             if (typeof _super[name] == "function" && fnTest.test(childArgs[name])) {
-                child.prototype[name] = CreateMethod(_super, name, childArgs[name]);
+                child.prototype[name] = LoadMethod(_super, name, childArgs[name]);
             }
             else {
                 child.prototype[name] = childArgs[name];
@@ -68,4 +71,4 @@ function Class(args) {
     return returnVal;
 }
 
-module.exports = Class;
+module.exports = Class
